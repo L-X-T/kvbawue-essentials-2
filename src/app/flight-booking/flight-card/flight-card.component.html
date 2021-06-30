@@ -1,0 +1,18 @@
+<!--<div *ngIf="item" class="card" [ngStyle]="{'background-color': selected ? 'rgb(204, 197, 185)' : '' }">-->
+<div class="card" [style.background-color]="selected ? 'rgb(204, 197, 185)' : ''">
+  <div class="header">
+    <h2 class="title">{{ item.from }} - {{ item.to }}</h2>
+  </div>
+
+  <div class="content">
+    <p>Flight-No.: #{{ item.id }}</p>
+    <p>Date: {{ item.date | date: 'dd.MM.yyyy HH:mm' }}</p>
+    <p>
+      @if (!selected) {
+        <button class="btn btn-default" (click)="onSelect()">Select</button>
+      } @else {
+        <button class="btn btn-default" (click)="onDeselect()">Deselect</button>
+      }
+    </p>
+  </div>
+</div>
