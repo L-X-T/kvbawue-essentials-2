@@ -4,18 +4,76 @@
   </div>
 
   <div class="content">
-    <form>
+    <form #flightSearchForm="ngForm">
       <div class="form-group">
         <label for="fsf_from">From (*)</label>
-        <input id="fsf_from" [(ngModel)]="from" name="from" class="form-control" />
-      </div>
-      <div class="form-group">
-        <label for="fsf_to">To (*)</label>
-        <input id="fsf_to" [(ngModel)]="to" name="to" class="form-control" />
+        <input
+          id="fsf_from"
+          [(ngModel)]="from"
+          autocomplete="false"
+          name="from"
+          class="form-control"
+          required
+          minlength="3"
+          maxlength="15"
+          pattern="[a-zA-ZäöüÄÖÜß ]+"
+          />
       </div>
 
+      @if (flightSearchForm.controls['from']?.errors) {
+        <div>
+          <div class="text-danger">From is invalid:</div>
+          <div class="text-info">{{ flightSearchForm.controls['from'].errors | json }}</div>
+          @if (flightSearchForm.controls['from'].errors?.['required']) {
+            <div class="text-danger">From is required.</div>
+          }
+          @if (flightSearchForm.controls['from'].errors?.['minlength']) {
+            <div class="text-danger">From minlength is 3.</div>
+          }
+          @if (flightSearchForm.controls['from'].errors?.['maxlength']) {
+            <div class="text-danger">From maxlength is 15.</div>
+          }
+          @if (flightSearchForm.controls['from'].errors?.['pattern']) {
+            <div class="text-danger">From has invalid input.</div>
+          }
+        </div>
+      }
+
       <div class="form-group">
-        <button [disabled]="!to || !from" (click)="onSearch()" class="btn btn-default">Search</button>
+        <label for="fsf_to">To (*)</label>
+        <input
+          id="fsf_to"
+          [(ngModel)]="to"
+          name="to"
+          class="form-control"
+          required
+          minlength="3"
+          maxlength="15"
+          pattern="[a-zA-ZäöüÄÖÜß ]+"
+          />
+      </div>
+
+      @if (flightSearchForm.controls['to']?.errors) {
+        <div>
+          <div class="text-danger">To is invalid:</div>
+          <div class="text-info">{{ flightSearchForm.controls['to'].errors | json }}</div>
+          @if (flightSearchForm.controls['to'].errors?.['required']) {
+            <div class="text-danger">To is required.</div>
+          }
+          @if (flightSearchForm.controls['to'].errors?.['minlength']) {
+            <div class="text-danger">To minlength is 3.</div>
+          }
+          @if (flightSearchForm.controls['to'].errors?.['maxlength']) {
+            <div class="text-danger">To maxlength is 15.</div>
+          }
+          @if (flightSearchForm.controls['to'].errors?.['pattern']) {
+            <div class="text-danger">To has invalid input.</div>
+          }
+        </div>
+      }
+
+      <div class="form-group">
+        <button [disabled]="!to || !from || flightSearchForm.invalid" (click)="onSearch()" class="btn btn-default">Search</button>
       </div>
     </form>
   </div>
