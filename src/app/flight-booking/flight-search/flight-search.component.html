@@ -14,29 +14,17 @@
           name="from"
           class="form-control"
           required
-          minlength="3"
-          maxlength="15"
+          [minlength]="minLength"
+          [maxlength]="maxLength"
           pattern="[a-zA-ZäöüÄÖÜß ]+"
           />
       </div>
 
-      @if (flightSearchForm.controls['from']?.errors) {
-        <div>
-          <div class="text-danger">From is invalid:</div>
-          <div class="text-info">{{ flightSearchForm.controls['from'].errors | json }}</div>
-          @if (flightSearchForm.controls['from'].errors?.['required']) {
-            <div class="text-danger">From is required.</div>
-          }
-          @if (flightSearchForm.controls['from'].errors?.['minlength']) {
-            <div class="text-danger">From minlength is 3.</div>
-          }
-          @if (flightSearchForm.controls['from'].errors?.['maxlength']) {
-            <div class="text-danger">From maxlength is 15.</div>
-          }
-          @if (flightSearchForm.controls['from'].errors?.['pattern']) {
-            <div class="text-danger">From has invalid input.</div>
-          }
-        </div>
+      @if (flightSearchForm.controls['from']) {
+        <app-flight-validation-errors
+          [errors]="flightSearchForm.controls['from'].errors"
+          fieldLabel="From"
+          />
       }
 
       <div class="form-group">
@@ -47,29 +35,17 @@
           name="to"
           class="form-control"
           required
-          minlength="3"
-          maxlength="15"
+          [minlength]="minLength"
+          [maxlength]="maxLength"
           pattern="[a-zA-ZäöüÄÖÜß ]+"
           />
       </div>
 
-      @if (flightSearchForm.controls['to']?.errors) {
-        <div>
-          <div class="text-danger">To is invalid:</div>
-          <div class="text-info">{{ flightSearchForm.controls['to'].errors | json }}</div>
-          @if (flightSearchForm.controls['to'].errors?.['required']) {
-            <div class="text-danger">To is required.</div>
-          }
-          @if (flightSearchForm.controls['to'].errors?.['minlength']) {
-            <div class="text-danger">To minlength is 3.</div>
-          }
-          @if (flightSearchForm.controls['to'].errors?.['maxlength']) {
-            <div class="text-danger">To maxlength is 15.</div>
-          }
-          @if (flightSearchForm.controls['to'].errors?.['pattern']) {
-            <div class="text-danger">To has invalid input.</div>
-          }
-        </div>
+      @if (flightSearchForm.controls['to']) {
+        <app-flight-validation-errors
+          [errors]="flightSearchForm.controls['to'].errors"
+          fieldLabel="To"
+          />
       }
 
       <div class="form-group">

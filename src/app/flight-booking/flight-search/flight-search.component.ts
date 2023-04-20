@@ -11,10 +11,18 @@ import { BehaviorSubject, Observable, Observer, Subject, Subscription } from 'rx
 import { share, takeUntil } from 'rxjs/operators';
 import { FlightCardComponent } from '../flight-card/flight-card.component';
 import { FlightStatusToggleComponent } from '../flight-status-toggle/flight-status-toggle.component';
+import { FlightValidationErrorsComponent } from '../flight-validation-errors/flight-validation-errors.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, FormsModule, CityPipe, FlightCardComponent, FlightStatusToggleComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    CityPipe,
+    FlightCardComponent,
+    FlightStatusToggleComponent,
+    FlightValidationErrorsComponent,
+  ],
   selector: 'app-flight-search',
   templateUrl: './flight-search.component.html',
   styleUrls: ['./flight-search.component.css'],
@@ -22,6 +30,10 @@ import { FlightStatusToggleComponent } from '../flight-status-toggle/flight-stat
 export class FlightSearchComponent implements OnInit, OnDestroy {
   from = 'Hamburg';
   to = 'Graz';
+
+  minLength = 3;
+  maxLength = 15;
+
   flights: Flight[] = []; // old school
   flights$?: Observable<Flight[]>; // observable
   flightsSubject = new BehaviorSubject<Flight[]>([]); // subject
@@ -81,7 +93,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       error: (errResp: HttpErrorResponse) => console.error('Error loading flights', errResp),
       complete: () => {
         // console.debug('Flights loading completed.');
-      }
+      },
     };
 
     // 3a. my subscription
