@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="header">
+    <h1 class="title">Airports</h1>
+  </div>
+
+  <div class="content">
+    <div class="row">
+      @let asyncAirports = airports$ | async;
+      @if (asyncAirports) {
+        @for (airport of asyncAirports; track airport) {
+          <div class="col-lg-3">{{ airport }}</div>
+        }
+      } @else {
+        <div class="col-lg-3">...isLoadingAirports...</div>
+      }
+    </div>
+  </div>
+</div>
