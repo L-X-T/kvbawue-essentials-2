@@ -5,11 +5,11 @@ import { Flight } from '../entities/flight';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FlightService } from './flight.service';
-import { CityPipe } from '../shared/pipes/city.pipe';
+import { AsyncCityPipe } from '../shared/pipes/async-city.pipe';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, FormsModule, CityPipe],
+  imports: [CommonModule, FormsModule, AsyncCityPipe],
   selector: 'app-flight-search',
   templateUrl: './flight-search.component.html',
   styleUrls: ['./flight-search.component.css'],
