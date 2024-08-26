@@ -18,14 +18,17 @@ export class FlightSearchComponent {
   flights: Flight[] = [];
   selectedFlight?: Flight;
 
+  message = '';
+
   private readonly http = inject(HttpClient);
 
+  private readonly url = 'http://www.angular.at/api/flight';
+  private readonly headers = new HttpHeaders().set('Accept', 'application/json');
+
   onSearch(): void {
-    const url = 'http://www.angular.at/api/flight';
-    const headers = new HttpHeaders().set('Accept', 'application/json');
     const params = new HttpParams().set('from', this.from).set('to', this.to);
 
-    this.http.get<Flight[]>(url, { headers, params }).subscribe({
+    this.http.get<Flight[]>(this.url, { headers: this.headers, params }).subscribe({
       next: (flights: Flight[]) => {
         console.log('Flights loaded: ', flights);
         this.flights = flights;
@@ -41,5 +44,19 @@ export class FlightSearchComponent {
 
   onSelect(selectedFlight: Flight): void {
     this.selectedFlight = selectedFlight;
+  }
+
+  onSave(): void {
+    this.http.post<Flight>(this.url, this.selectedFlight, { headers: this.headers }).subscribe({
+      next: (flight) => {
+        console.log('Flight saved: ', flight);
+        this.selectedFlight = flight;
+        this.message = 'Success!';
+      },
+      error: (errResponse: HttpErrorResponse) => {
+        console.error('Error saving flight', errResponse);
+        this.message = 'Error: ' + errResponse.message;
+      },
+    });
   }
 }

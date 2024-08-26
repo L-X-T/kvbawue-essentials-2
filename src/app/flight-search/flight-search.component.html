@@ -52,8 +52,38 @@
 
 @if (selectedFlight) {
   <div class="card">
+    <div class="header">
+      <h2 class="title">Flight Edit</h2>
+    </div>
+
     <div class="content">
-      <pre>{{ selectedFlight | json }}</pre>
+      <div class="form-group">
+        <label>Id</label>
+        <input [(ngModel)]="selectedFlight.id" class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label>From</label>
+        <input [(ngModel)]="selectedFlight.from" class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label>To</label>
+        <input [(ngModel)]="selectedFlight.to" class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label>Date</label>
+        <input [(ngModel)]="selectedFlight.date" class="form-control" />
+      </div>
+
+      <button (click)="onSave()" class="btn btn-default">Save</button>
+
+      @if (message) {
+        <div>
+          {{ message }}
+        </div>
+      }
     </div>
   </div>
 }
