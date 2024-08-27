@@ -4,12 +4,14 @@
   </div>
 
   <div class="content">
-    <div class="row">
-      @for (airport of airports(); track airport) {
-        <div class="col-lg-3">{{ airport }}</div>
-      } @empty {
+    @for (airport of airports(); track airport) {
+      <button class="btn btn-default" style="margin: 0 10px 10px 0" (click)="airportSelected.emit(airport)">
+        {{ airport }}
+      </button>
+    } @empty {
+      <div class="row">
         <div class="col-lg-3">...isLoadingAirports...</div>
-      }
-    </div>
+      </div>
+    }
   </div>
 </div>

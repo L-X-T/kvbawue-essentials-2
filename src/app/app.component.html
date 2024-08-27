@@ -10,7 +10,13 @@
       <h1>{{ title }}</h1>
 
       <app-flight-search />
-      <app-airports />
+      <app-airports [airports]="airports()" (airportSelected)="selectedAirport = $event" />
+
+      @if (selectedAirport) {
+        <div class="card">
+          <div class="content">Selected Airport: {{ selectedAirport }}</div>
+        </div>
+      }
     </div>
   </div>
 </div>
