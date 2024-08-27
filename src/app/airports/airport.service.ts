@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { AirportNameFormat } from '../entities/airport-name-format';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AirportService {
   private readonly url = 'http://www.angular.at/api/airport';

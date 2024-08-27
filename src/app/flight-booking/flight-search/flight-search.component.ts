@@ -2,11 +2,11 @@ import { Component, computed, DestroyRef, effect, inject, OnDestroy, signal } fr
 import { HttpErrorResponse } from '@angular/common/http';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { Flight } from '../entities/flight';
+import { Flight } from '../../entities/flight';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FlightService } from './flight.service';
-import { CityPipe } from '../shared/pipes/city.pipe';
+import { CityPipe } from '../../shared/pipes/city.pipe';
 import { BehaviorSubject, Observable, Observer, Subject, Subscription } from 'rxjs';
 import { share, takeUntil } from 'rxjs/operators';
 
