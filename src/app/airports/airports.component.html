@@ -5,12 +5,9 @@
 
   <div class="content">
     <div class="row">
-      @let asyncAirports = airports$ | async;
-      @if (asyncAirports) {
-        @for (airport of asyncAirports; track airport) {
-          <div class="col-lg-3">{{ airport }}</div>
-        }
-      } @else {
+      @for (airport of airports(); track airport) {
+        <div class="col-lg-3">{{ airport }}</div>
+      } @empty {
         <div class="col-lg-3">...isLoadingAirports...</div>
       }
     </div>
