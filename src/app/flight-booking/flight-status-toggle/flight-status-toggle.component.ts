@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, model } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -7,6 +7,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./flight-status-toggle.component.css'],
 })
 export class FlightStatusToggleComponent {
-  @Input() delayed = false;
-  @Output() delayedChange = new EventEmitter<boolean>();
+  delayed = model(false);
+
+  onToggle(): void {
+    this.delayed.update((delayed) => !delayed);
+  }
 }
