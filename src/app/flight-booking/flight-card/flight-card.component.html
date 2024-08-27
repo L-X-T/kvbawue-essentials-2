@@ -5,16 +5,15 @@
   </div>
 
   <div class="content">
-    <p>Flight-No.: #{{ item.id }}<span *ngIf="item.delayed"> (delayed)</span></p>
+    <p>
+      Flight-No.: #{{ item.id }}
+      @if (item.delayed) {
+        <span> (delayed)</span>
+      }
+    </p>
     <p [class.delayed]="item.delayed">Date: {{ item.date | date: 'dd.MM.yyyy HH:mm' }}</p>
     <p>
-      @if (!selected) {
-        <button class="btn btn-default" (click)="onSelect()">Select</button>
-      } @else {
-        <button class="btn btn-default" (click)="onDeselect()">Deselect</button>
-      }
-
-      <app-flight-status-toggle style="margin-left: 10px" [(delayed)]="item.delayed" />
+      <ng-content />
     </p>
   </div>
 </div>
